@@ -131,5 +131,5 @@ its default configuration (`KEY_W = 128`, `PAGE_BYTES = 256`): same names,
 same widths, same handshakes, same beat counts and same response timing. The
 original SystemVerilog and cocotb suites run unmodified apart from module
 package imports and vector paths. The one behavioural difference is the
-output-controller recovery fix described in `docs/decisions.md`, which only
-affects the command issued right after a watchdog abort without a reset.
+output-controller recovery fix described in the README (Verification), which
+only affects the command issued right after a watchdog abort without a reset.

@@ -24,9 +24,10 @@ make venv
 source .venv/bin/activate
 ```
 
-This installs `requirements.txt` (cocotb, cryptography, pycryptodomex,
-pytest). The cocotb Makefile needs `cocotb-config` on `PATH`, so activate the
-environment in every shell you use for `make cocotb*` or `make matrix`.
+This creates `.venv` and installs `cocotb>=2.0`, `cryptography>=42`,
+`pycryptodomex>=3.20` and `pytest>=8` (the same list is in the README). The
+cocotb Makefile needs `cocotb-config` on `PATH`, so activate the environment
+in every shell you use for `make cocotb*` or `make matrix`.
 
 ## 3. Sanity checks (about one minute)
 
@@ -50,8 +51,8 @@ make matrix          # documented cocotb matrix over key size, page size and sui
 `make sim-all` prints one `[PASS]`/`[FAIL]` line per bench and a summary.
 `make matrix` prints one line per (KEY_W, PAGE_BYTES, suite) with the log
 path on failure; logs go to `build/matrix_*.log`, reports to
-`build/reports/`. See `docs/verification.md` for what each suite covers and
-the last recorded results.
+`build/reports/`. The README's Verification section lists what each suite
+covers and the last recorded results.
 
 ## 5. Choosing a configuration
 

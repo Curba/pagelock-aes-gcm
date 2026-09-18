@@ -46,7 +46,7 @@ package aes_gcm_pkg;
   endfunction
 
   // Default watchdog threshold per key width. Measured worst-case per-block
-  // service time is well below this for both sizes (see docs/verification.md);
+  // service time is well below this for both sizes (see docs/parameters.md);
   // AES-256 only adds four key-schedule rounds, so the same value is used.
   function automatic int unsigned gcm_wdt_timeout_default(input int unsigned key_w);
     return (key_w == 256) ? 32'd4095 : 32'd4095;

@@ -6,7 +6,7 @@
 #   make sim-all              all SystemVerilog benches, default config, Verilator
 #   make cocotb               cocotb KAT suite, default config (KEY_W=128 PAGE_BYTES=256)
 #   make cocotb KEY_W=256 PAGE_BYTES=4096 MODULE=test_aes_gcm_random
-#   make matrix               full configuration matrix (see docs/verification.md)
+#   make matrix               full configuration matrix (see README.md, Verification)
 #   make elab-check           illegal parameter sets must fail at elaboration
 #   make conformance          NIST CAVP + McGrew-Viega sweep of the Python reference
 
@@ -66,7 +66,7 @@ help:
 venv:
 	$(PYTHON) -m venv .venv
 	.venv/bin/pip install --upgrade pip
-	.venv/bin/pip install -r requirements.txt
+	.venv/bin/pip install "cocotb>=2.0" "cryptography>=42" "pycryptodomex>=3.20" "pytest>=8"
 	@echo "Activate with: source .venv/bin/activate"
 
 # ---------------------------------------------------------------------------
