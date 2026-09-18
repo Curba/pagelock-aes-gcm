@@ -1,0 +1,14 @@
+# Verible lint rule config — shared by make lint and the pre-commit hook.
+# Syntax: -rule-name to suppress, +rule-name to enforce.
+
+# File must match module name — we allow exceptions (e.g. tum_tieoff.sv = module tum_ss)
+-module-filename
+
+# Parameters named UPPER_SNAKE_CASE, not UpperCamelCase
+-parameter-name-style
+
+# Style nits: auto-fixed by pre-commit hook or left for owners to clean up
+-no-trailing-spaces
+-posix-eof
+-line-length
+-explicit-parameter-storage-type

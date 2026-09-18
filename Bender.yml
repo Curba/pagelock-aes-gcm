@@ -1,0 +1,54 @@
+package:
+  name: aes_gcm_ip
+  authors:
+    - "Baris Guzel"
+  description: "Standalone parameterised AES-128/256-GCM page cipher (aes_gcm_top)"
+
+dependencies: {}
+
+sources:
+  # ------------------------------------------------------------------
+  # Level 0: package (compile first)
+  # ------------------------------------------------------------------
+  - rtl/pkg/aes_gcm_pkg.sv
+
+  # ------------------------------------------------------------------
+  # Level 1: vendored Secworks AES core (Verilog-2001, read-only)
+  # ------------------------------------------------------------------
+  - target: any(simulation, synthesis)
+    files:
+      - rtl/third_party/secworks_aes/src/rtl/aes_sbox.v
+      - rtl/third_party/secworks_aes/src/rtl/aes_inv_sbox.v
+      - rtl/third_party/secworks_aes/src/rtl/aes_key_mem.v
+      - rtl/third_party/secworks_aes/src/rtl/aes_encipher_block.v
+      - rtl/third_party/secworks_aes/src/rtl/aes_decipher_block.v
+      - rtl/third_party/secworks_aes/src/rtl/aes_core.v
+
+  # ------------------------------------------------------------------
+  # Level 2: block RTL, compile order ghash -> fsm -> oc -> top
+  # ------------------------------------------------------------------
+  - target: any(simulation, synthesis)
+    files:
+      - rtl/aes_ghash.sv
+      - rtl/aes_gcm_fsm.sv
+      - rtl/aes_gcm_oc.sv
+      - rtl/aes_gcm_top.sv
+
+  # ------------------------------------------------------------------
+  # SystemVerilog testbenches (Verilator, default configuration)
+  # ------------------------------------------------------------------
+  - target: all(simulation, test)
+    files:
+      - tb/sv/unit/tb_aes_ghash.sv
+      - tb/sv/unit/tb_aes_gcm_fsm.sv
+      - tb/sv/unit/tb_aes_gcm_timeout.sv
+      - tb/sv/unit/tb_aes_gcm_quickfix.sv
+      - tb/sv/output/tb_output_fsm_happy.sv
+      - tb/sv/output/tb_output_fsm_backpressure.sv
+      - tb/sv/integration/tb_aes_smoke.sv
+      - tb/sv/integration/tb_aes_gcm_top.sv
+      - tb/sv/integration/tb_aes_gcm_roundtrip.sv
+      - tb/sv/integration/tb_aes_gcm_backpressure.sv
+      - tb/sv/integration/tb_aes_gcm_deep_backpressure.sv
+      - tb/sv/integration/tb_v2_contract.sv
+      - tb/sv/integration/tb_aes_gcm_param.sv
